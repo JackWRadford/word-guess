@@ -18,7 +18,7 @@ class KeyRow extends StatelessWidget {
         shrinkWrap: true,
         itemCount: rowData.length,
         itemBuilder: (ctx, i) => KeyTile(
-          char: rowData[i].char!,
+          char: rowData[i].char,
           ctState: rowData[i].ctState,
         ),
       ),

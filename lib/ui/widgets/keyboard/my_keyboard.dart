@@ -1,10 +1,12 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:word_guess/core/models/char_model.dart';
 import 'package:word_guess/core/viewModels/game_model.dart';
 import 'package:word_guess/ui/shared/app_ui_spacing.dart';
 import 'package:word_guess/ui/widgets/keyboard/key_row.dart';
 import 'package:word_guess/ui/widgets/keyboard/keyboard_btn.dart';
+import 'package:word_guess/ui/widgets/statistics/stats_dialog.dart';
 
 /// for user input. also shows state of letters
 /// includes chars, backspace and submit word
@@ -57,7 +59,14 @@ class MyKeyboard extends StatelessWidget {
               iconData: CupertinoIcons.arrow_turn_down_left,
               color: CupertinoColors.activeGreen,
               onTap: () {
-                Provider.of<GameModel>(context, listen: false).submit();
+                List<bool> result =
+                    Provider.of<GameModel>(context, listen: false).submit();
+                if (result.contains(true)) {
+                  showDialog(
+                    context: context,
+                    builder: (ctx) => const StatsDialog(),
+                  );
+                }
               },
             ),
             UIHelper.horizontalSpaceVerySmall(),

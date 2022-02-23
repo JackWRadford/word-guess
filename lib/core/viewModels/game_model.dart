@@ -50,7 +50,7 @@ class GameModel extends BaseModel {
 
   final int _maxAttempts = 6;
 
-  final int _wordLength = 5;
+  final int wordLength = 5;
 
   final _random = Random();
 
@@ -61,35 +61,60 @@ class GameModel extends BaseModel {
   void setRandWord() {
     String _newWord = _words[_random.nextInt(_words.length)];
     currentWord = _newWord;
+    charData[0].ctState = CharTileState.selected;
     notifyListeners();
   }
 
+  int _getIndexForList() {
+    return _currentIndex + ((_attempt - 1) * wordLength);
+  }
+
   void keyboardInput(String char) {
-    if (_currentIndex < _wordLength) {
-      charData[_currentIndex + ((_attempt - 1) * _wordLength)] =
-          CharModel(char: char, ctState: CharTileState.active);
-      _currentIndex++;
+    bool _notLastChar = (_currentIndex < wordLength - 1);
+    if (_currentIndex <= wordLength - 1) {
+      charData[_getIndexForList()] = CharModel(
+          char: char,
+          ctState:
+              (_notLastChar) ? CharTileState.active : CharTileState.selected);
+      if (_notLastChar) {
+        _currentIndex++;
+        charData[_getIndexForList()] =
+            CharModel(char: '', ctState: CharTileState.selected);
+      }
     }
     notifyListeners();
   }
 
   void backspace() {
     if (_currentIndex > 0) {
-      _currentIndex--;
-      charData[_currentIndex + ((_attempt - 1) * _wordLength)] =
-          CharModel(char: '', ctState: CharTileState.active);
+      if ((_currentIndex < wordLength - 1) ||
+          (charData[_getIndexForList()].char.isEmpty)) {
+        charData[_getIndexForList()].ctState = CharTileState.active;
+        _currentIndex--;
+      }
+      charData[_getIndexForList()] =
+          CharModel(char: '', ctState: CharTileState.selected);
     }
     notifyListeners();
   }
 
-  void submit() {
-    if (_currentIndex == _wordLength) {
+  /// called by submit btn
+  /// return [isLastAttempt,isCorrect]
+  List<bool> submit() {
+    List<bool> result = [false, false];
+    if ((_currentIndex == wordLength - 1) &&
+        (charData[_getIndexForList()].char.isNotEmpty)) {
+      charData[_getIndexForList()].ctState = CharTileState.active;
       _currentIndex = 0;
-      _attempt++;
-      if (_attempt == _maxAttempts) {
-        print('done');
+      if (_attempt < _maxAttempts) {
+        _attempt++;
+        charData[_getIndexForList()].ctState = CharTileState.selected;
+      } else {
+        // all attempts used
+        result[0] = true;
       }
       notifyListeners();
     }
+    return result;
   }
 }

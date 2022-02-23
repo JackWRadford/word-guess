@@ -1,4 +1,5 @@
 import 'package:get_it/get_it.dart';
+import 'package:word_guess/core/themeNotifier.dart';
 import 'package:word_guess/core/viewModels/game_model.dart';
 
 ///get it instance
@@ -11,4 +12,5 @@ void initLocator() {
 
   //view models
   locator.registerFactory(() => GameModel());
+  locator.registerFactory(() => ThemeNotifier());
 }

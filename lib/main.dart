@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:word_guess/core/locator.dart';
+import 'package:word_guess/core/themeNotifier.dart';
 import 'package:word_guess/core/viewModels/game_model.dart';
 import 'package:word_guess/ui/shared/app_themes.dart';
 import 'package:word_guess/ui/views/game_view.dart';
@@ -11,7 +12,14 @@ void main() {
 
   //initialize GetIt Locator
   initLocator();
-  runApp(const MyApp());
+
+  runApp(
+    //wrap app in theme notifier as theme is needed earlier
+    ChangeNotifierProvider<ThemeNotifier>(
+      create: (_) => ThemeNotifier(),
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -33,7 +41,7 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        theme: lightTheme,
+        theme: Provider.of<ThemeNotifier>(context).getTheme(),
         builder: (BuildContext context, Widget? child) {
           return MediaQuery(
             data: MediaQuery.of(context).copyWith(

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:word_guess/core/models/char_model.dart';
+import 'package:word_guess/core/viewModels/game_model.dart';
 import 'package:word_guess/ui/shared/app_ui_sizes.dart';
 import 'package:word_guess/ui/widgets/game/char_tile.dart';
 
@@ -14,8 +16,9 @@ class GameArea extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: largePadding),
       child: GridView.builder(
         physics: const NeverScrollableScrollPhysics(),
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 5, childAspectRatio: 1),
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: Provider.of<GameModel>(context).wordLength,
+            childAspectRatio: 1),
         itemCount: guessData.length,
         itemBuilder: (BuildContext ctx, i) =>
             CharTile(char: guessData[i].char, ctState: guessData[i].ctState),
