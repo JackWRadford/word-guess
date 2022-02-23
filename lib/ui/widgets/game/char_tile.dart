@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:word_guess/core/enumerations/char_tile_state.dart';
+import 'package:word_guess/core/enums/char_tile_state.dart';
 import 'package:word_guess/ui/shared/app_text_styles.dart';
 import 'package:word_guess/ui/shared/app_ui_sizes.dart';
 

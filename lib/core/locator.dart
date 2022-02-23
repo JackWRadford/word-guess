@@ -1,4 +1,5 @@
 import 'package:get_it/get_it.dart';
+import 'package:word_guess/core/viewModels/game_model.dart';
 
 ///get it instance
 GetIt locator = GetIt.instance;
@@ -9,5 +10,5 @@ void initLocator() {
   // locator.registerLazySingleton(() => LocalDatabaseApi());
 
   //view models
-  // locator.registerFactory(() => ThemeNotifier());
+  locator.registerFactory(() => GameModel());
 }

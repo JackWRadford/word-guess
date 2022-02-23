@@ -1,4 +1,4 @@
-import 'package:word_guess/core/enumerations/char_tile_state.dart';
+import 'package:word_guess/core/enums/char_tile_state.dart';
 
 /// model for charTile data
 /// includes char string and char tile state

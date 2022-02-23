@@ -1,8 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
+import 'package:word_guess/core/locator.dart';
+import 'package:word_guess/core/viewModels/game_model.dart';
 import 'package:word_guess/ui/shared/app_themes.dart';
 import 'package:word_guess/ui/views/game_view.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  //initialize GetIt Locator
+  initLocator();
   runApp(const MyApp());
 }
 
@@ -12,10 +20,42 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: lightTheme,
-      home: const MainView(),
+    //set preferred device orientations
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<GameModel>(
+          create: (_) => GameModel(),
+        ),
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: lightTheme,
+        builder: (BuildContext context, Widget? child) {
+          return MediaQuery(
+            data: MediaQuery.of(context).copyWith(
+              textScaleFactor: 1.0,
+            ),
+            child: ScrollConfiguration(
+              behavior: MyBehavior(),
+              child: child!,
+            ),
+          );
+        },
+        home: const MainView(),
+      ),
     );
+  }
+}
+
+///scroll behavior to remove overscroll splash from Android scroll views
+class MyBehavior extends ScrollBehavior {
+  @override
+  Widget buildViewportChrome(
+      BuildContext context, Widget child, AxisDirection axisDirection) {
+    return child;
   }
 }
