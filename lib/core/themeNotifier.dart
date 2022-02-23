@@ -19,7 +19,7 @@ class ThemeNotifier with ChangeNotifier {
   //returns MyAppTheme enum value
   MyAppTheme _getMyAppTheme() {
     // TODO get theme from shared prefs
-    return MyAppTheme.lightTheme;
+    return MyAppTheme.darkTheme;
   }
 
   ///sets new theme (updates DB)

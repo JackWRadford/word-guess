@@ -16,43 +16,11 @@ class MyKeyboard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<CharModel> k1 = [
-      CharModel(char: 'q'),
-      CharModel(char: 'w'),
-      CharModel(char: 'e'),
-      CharModel(char: 'r'),
-      CharModel(char: 't'),
-      CharModel(char: 'y'),
-      CharModel(char: 'u'),
-      CharModel(char: 'i'),
-      CharModel(char: 'o'),
-      CharModel(char: 'p'),
-    ];
-    List<CharModel> k2 = [
-      CharModel(char: 'a'),
-      CharModel(char: 's'),
-      CharModel(char: 'd'),
-      CharModel(char: 'f'),
-      CharModel(char: 'g'),
-      CharModel(char: 'h'),
-      CharModel(char: 'j'),
-      CharModel(char: 'k'),
-      CharModel(char: 'l'),
-    ];
-    List<CharModel> k3 = [
-      CharModel(char: 'z'),
-      CharModel(char: 'x'),
-      CharModel(char: 'c'),
-      CharModel(char: 'v'),
-      CharModel(char: 'b'),
-      CharModel(char: 'n'),
-      CharModel(char: 'm'),
-    ];
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        KeyRow(rowData: k1),
-        KeyRow(rowData: k2),
+        KeyRow(rowData: Provider.of<GameModel>(context).k1),
+        KeyRow(rowData: Provider.of<GameModel>(context).k2),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -71,7 +39,7 @@ class MyKeyboard extends StatelessWidget {
               },
             ),
             UIHelper.horizontalSpaceVerySmall(),
-            KeyRow(rowData: k3),
+            KeyRow(rowData: Provider.of<GameModel>(context).k3),
             UIHelper.horizontalSpaceVerySmall(),
             KeyboardBtn(
               iconData: CupertinoIcons.delete_left,

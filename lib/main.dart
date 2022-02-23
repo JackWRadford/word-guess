@@ -4,7 +4,6 @@ import 'package:provider/provider.dart';
 import 'package:word_guess/core/locator.dart';
 import 'package:word_guess/core/themeNotifier.dart';
 import 'package:word_guess/core/viewModels/game_model.dart';
-import 'package:word_guess/ui/shared/app_themes.dart';
 import 'package:word_guess/ui/views/game_view.dart';
 
 void main() {
