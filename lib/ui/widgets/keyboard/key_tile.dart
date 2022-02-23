@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:word_guess/core/enums/char_tile_state.dart';
 import 'package:word_guess/core/viewModels/game_model.dart';
+import 'package:word_guess/ui/helper/helper_functions.dart';
 import 'package:word_guess/ui/shared/app_text_styles.dart';
 import 'package:word_guess/ui/shared/app_ui_sizes.dart';
 
@@ -23,6 +24,7 @@ class KeyTile extends StatelessWidget {
       child: SizedBox(
         width: 35,
         child: Card(
+          color: getColorForState(context, ctState),
           margin: const EdgeInsets.symmetric(
               horizontal: veryTinyPadding, vertical: tinyPadding),
           shape: const RoundedRectangleBorder(

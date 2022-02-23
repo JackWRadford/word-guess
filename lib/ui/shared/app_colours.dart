@@ -1,17 +1,16 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 
 ///green
-const Color myGreen = Color(0xff09814a);
-
-///red
-const Color myRed = Colors.red;
+const Color myGreen = CupertinoColors.systemGreen;
 
 ///yellow
 const Color myYellow = CupertinoColors.systemYellow;
 
+///red
+const Color myRed = CupertinoColors.systemRed;
+
 ///text grey colour (taken from iOS13 systemGray)
-const Color myGrey = Color(0xff8E8E93);
+const Color myGrey = CupertinoColors.systemGrey2;
 
 ///dark app background colour
 const Color darkBG = Color(0xff1c1c1e);

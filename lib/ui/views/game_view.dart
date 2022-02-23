@@ -5,6 +5,7 @@ import 'package:word_guess/core/viewModels/game_model.dart';
 import 'package:word_guess/ui/shared/app_ui_spacing.dart';
 import 'package:word_guess/ui/widgets/game/game_area.dart';
 import 'package:word_guess/ui/widgets/keyboard/my_keyboard.dart';
+import 'package:word_guess/ui/widgets/statistics/stats_dialog.dart';
 
 /// main game view
 class MainView extends StatelessWidget {
@@ -15,10 +16,12 @@ class MainView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          onPressed: () {},
+          onPressed: () {
+            showDialog(context: context, builder: (ctx) => const StatsDialog());
+          },
           icon: const Icon(CupertinoIcons.chart_bar_alt_fill),
         ),
-        title: Text(Provider.of<GameModel>(context).currentWord),
+        // title: Text(Provider.of<GameModel>(context).currentWord),
         centerTitle: true,
         actions: [
           IconButton(

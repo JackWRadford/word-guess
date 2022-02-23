@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:word_guess/core/models/char_model.dart';
 import 'package:word_guess/core/viewModels/game_model.dart';
+import 'package:word_guess/ui/shared/app_colours.dart';
 import 'package:word_guess/ui/shared/app_ui_spacing.dart';
 import 'package:word_guess/ui/widgets/keyboard/key_row.dart';
 import 'package:word_guess/ui/widgets/keyboard/keyboard_btn.dart';
@@ -57,7 +58,7 @@ class MyKeyboard extends StatelessWidget {
           children: [
             KeyboardBtn(
               iconData: CupertinoIcons.arrow_turn_down_left,
-              color: CupertinoColors.activeGreen,
+              color: myGreen,
               onTap: () {
                 List<bool> result =
                     Provider.of<GameModel>(context, listen: false).submit();
@@ -74,7 +75,7 @@ class MyKeyboard extends StatelessWidget {
             UIHelper.horizontalSpaceVerySmall(),
             KeyboardBtn(
               iconData: CupertinoIcons.delete_left,
-              color: CupertinoColors.systemGrey,
+              color: myGrey,
               onTap: () {
                 Provider.of<GameModel>(context, listen: false).backspace();
               },
