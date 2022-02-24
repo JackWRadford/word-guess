@@ -1,4 +1,5 @@
 import 'package:get_it/get_it.dart';
+import 'package:word_guess/core/services/shared_pref_service.dart';
 import 'package:word_guess/core/themeNotifier.dart';
 import 'package:word_guess/core/viewModels/game_model.dart';
 
@@ -8,7 +9,7 @@ GetIt locator = GetIt.instance;
 ///initialize locator
 void initLocator() {
   //services
-  // locator.registerLazySingleton(() => LocalDatabaseApi());
+  locator.registerLazySingleton(() => SharedPrefService());
 
   //view models
   locator.registerFactory(() => GameModel());

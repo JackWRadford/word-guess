@@ -4,10 +4,14 @@ import 'package:provider/provider.dart';
 import 'package:word_guess/core/locator.dart';
 import 'package:word_guess/core/themeNotifier.dart';
 import 'package:word_guess/core/viewModels/game_model.dart';
+import 'package:word_guess/core/services/shared_pref_service.dart';
 import 'package:word_guess/ui/views/game_view.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  //initialize SharedPrefs
+  await initSharedPrefs();
 
   //initialize GetIt Locator
   initLocator();
