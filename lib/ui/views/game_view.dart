@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:word_guess/core/viewModels/game_model.dart';
+import 'package:word_guess/ui/shared/app_ui_sizes.dart';
 import 'package:word_guess/ui/shared/app_ui_spacing.dart';
 import 'package:word_guess/ui/widgets/game/game_area.dart';
 import 'package:word_guess/ui/widgets/keyboard/my_keyboard.dart';
@@ -30,20 +31,25 @@ class MainView extends StatelessWidget {
           ),
         ],
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        mainAxisSize: MainAxisSize.max,
-        children: [
-          // word guess section
-          Expanded(
-            child: GameArea(
-              guessData: Provider.of<GameModel>(context).charData,
+      body: SafeArea(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            // word guess section
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: largePadding),
+                child: GameArea(
+                  guessData: Provider.of<GameModel>(context).charData,
+                ),
+              ),
             ),
-          ),
-          // keyboard
-          const MyKeyboard(),
-          UIHelper.verticalSpaceSmall(),
-        ],
+            // keyboard
+            const MyKeyboard(),
+            UIHelper.verticalSpaceSmall(),
+          ],
+        ),
       ),
     );
   }

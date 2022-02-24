@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:word_guess/core/enums/char_tile_state.dart';
-import 'package:word_guess/core/themeNotifier.dart';
 import 'package:word_guess/ui/helper/helper_functions.dart';
+import 'package:word_guess/ui/shared/app_colours.dart';
 import 'package:word_guess/ui/shared/app_text_styles.dart';
 import 'package:word_guess/ui/shared/app_ui_sizes.dart';
 
@@ -19,14 +18,12 @@ class CharTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ThemeNotifier themeNotifier = Provider.of<ThemeNotifier>(context);
     return Card(
       color: getColorForState(context, ctState),
       shape: RoundedRectangleBorder(
         borderRadius: const BorderRadius.all(Radius.circular(smallRadius)),
         side: (ctState == CharTileState.selected)
-            ? BorderSide(
-                width: 3, color: themeNotifier.getHighlightColor(false))
+            ? const BorderSide(width: 3, color: myGrey)
             : const BorderSide(width: 0.3, color: Colors.transparent),
       ),
       child: Center(

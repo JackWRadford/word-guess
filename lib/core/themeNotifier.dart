@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:word_guess/core/enums/appTheme.dart';
+import 'package:word_guess/core/enums/app_theme.dart';
 import 'package:word_guess/ui/shared/app_colours.dart';
 import 'package:word_guess/ui/shared/app_themes.dart';
 

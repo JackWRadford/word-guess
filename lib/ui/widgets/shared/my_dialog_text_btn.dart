@@ -27,7 +27,7 @@ class MyDialogTextBtn extends StatelessWidget {
           decoration: const BoxDecoration(
             color: CupertinoColors.activeGreen,
             borderRadius: BorderRadius.all(
-              Radius.circular(largeRadius),
+              Radius.circular(mediumRadius),
             ),
           ),
           child: Center(

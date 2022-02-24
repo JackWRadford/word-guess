@@ -1,6 +1,8 @@
 import 'dart:math';
 
+import 'package:word_guess/core/all_words_list.dart';
 import 'package:word_guess/core/enums/char_tile_state.dart';
+import 'package:word_guess/core/enums/submit_state.dart';
 import 'package:word_guess/core/models/char_model.dart';
 import 'package:word_guess/core/viewModels/base_model.dart';
 import 'package:word_guess/core/words_list.dart';
@@ -49,6 +51,8 @@ class GameModel extends BaseModel {
   int _currentIndex = 0;
   int _attempt = 1;
 
+  bool correctGuess = false;
+
   final int _maxAttempts = 6;
 
   final int wordLength = 5;
@@ -68,6 +72,7 @@ class GameModel extends BaseModel {
   }
 
   void _generateCharData() {
+    charData = [];
     for (var i = 0; i < (wordLength * _maxAttempts); i++) {
       charData.add(CharModel(
           char: '',
@@ -124,14 +129,17 @@ class GameModel extends BaseModel {
 
   /// called by submit btn
   /// return [isLastAttempt,isCorrect]
-  List<bool> submit() {
-    List<bool> result = [false, false];
+  SubmitState submit() {
+    SubmitState submitState = SubmitState.wrong;
     if ((_currentIndex == wordLength - 1) &&
         (charData[_getIndexForList()].char.isNotEmpty)) {
-      bool isCorrect = _checkWordAttempt();
-      if (isCorrect) {
+      if (!_checkWordExists()) {
+        return SubmitState.notWord;
+      }
+      if (_checkWordAttempt()) {
         // correct word was guessed
-        result[1] = true;
+        correctGuess = true;
+        submitState = SubmitState.correct;
         _resetKeyboard();
       } else if (_attempt < _maxAttempts) {
         // set next row to active
@@ -145,32 +153,69 @@ class GameModel extends BaseModel {
         charData[_getIndexForList()].ctState = CharTileState.selected;
       } else {
         // all attempts used
-        result[0] = true;
+        submitState = SubmitState.last;
         _resetKeyboard();
       }
       _currentIndex = 0;
       notifyListeners();
     }
-    return result;
+    return submitState;
+  }
+
+  bool _checkWordExists() {
+    int checkStart = ((_attempt - 1) * wordLength);
+    int checkEnd = checkStart + wordLength;
+    String word = "";
+    for (var i = checkStart; i < checkEnd; i++) {
+      word += charData[i].char;
+    }
+    return (allWords.contains(word) || words.contains(word));
   }
 
   /// return true if the word has been guessed correctly
+  /// also updates char tile states to show colours
   bool _checkWordAttempt() {
     int checkStart = ((_attempt - 1) * wordLength);
     int checkEnd = checkStart + wordLength;
-    int count = 0;
     bool result = true;
+    // list of chars that have state already set
+    String charList = '';
+    // check for letters in the correct place
+    int count = 0;
     for (var i = checkStart; i < checkEnd; i++) {
-      if (charData[i].char == currentWord[count]) {
+      String char = charData[i].char;
+      if (char == currentWord[count]) {
         charData[i].ctState = CharTileState.correct;
-        _updateKeyTile(charData[i].char, CharTileState.correct);
-      } else if (currentWord.contains(charData[i].char)) {
+        _updateKeyTile(char, CharTileState.correct, false);
+        charList += char;
+      }
+      count++;
+    }
+    // check for chars that exist (not already correct/
+    //repeated and already accounted for correct amount)
+    count = 0;
+    for (var i = checkStart; i < checkEnd; i++) {
+      String char = charData[i].char;
+      if ((currentWord.contains(char)) &&
+          (char.allMatches(currentWord).length >
+              char.allMatches(charList).length) &&
+          (charData[i].ctState != CharTileState.correct)) {
         charData[i].ctState = CharTileState.exists;
-        _updateKeyTile(charData[i].char, CharTileState.exists);
+        _updateKeyTile(char, CharTileState.exists, true);
+        charList += char;
         result = false;
-      } else {
+      }
+      count++;
+    }
+    // set other chars to wrong
+    count = 0;
+    for (var i = checkStart; i < checkEnd; i++) {
+      String char = charData[i].char;
+      CharTileState ctState = charData[i].ctState;
+      if ((ctState != CharTileState.correct) &&
+          (ctState != CharTileState.exists)) {
         charData[i].ctState = CharTileState.incorrect;
-        _updateKeyTile(charData[i].char, CharTileState.incorrect);
+        _updateKeyTile(char, CharTileState.incorrect, true);
         result = false;
       }
       count++;
@@ -179,24 +224,36 @@ class GameModel extends BaseModel {
   }
 
   /// set state for given keyboard tile
-  void _updateKeyTile(String char, CharTileState ctState) {
-    for (var k in k1) {
-      if (k.char == char) {
-        k.ctState = ctState;
-        return;
+  /// [check] only set new state if current is active
+  void _updateKeyTile(String char, CharTileState ctState, bool check) {
+    bool _checkKeyRow(List<CharModel> list) {
+      for (var k in list) {
+        if (k.char == char) {
+          if (check) {
+            if (k.ctState == CharTileState.active) k.ctState = ctState;
+          } else {
+            k.ctState = ctState;
+          }
+          return true;
+        }
       }
+      return false;
     }
-    for (var k in k2) {
-      if (k.char == char) {
-        k.ctState = ctState;
-        return;
-      }
-    }
-    for (var k in k3) {
-      if (k.char == char) {
-        k.ctState = ctState;
-        return;
-      }
-    }
+
+    bool stop = false;
+    stop = _checkKeyRow(k1);
+    if (stop) return;
+    stop = _checkKeyRow(k2);
+    if (stop) return;
+    stop = _checkKeyRow(k3);
+  }
+
+  void resetGame() {
+    correctGuess = false;
+    _currentIndex = 0;
+    _attempt = 1;
+    _generateCharData();
+    _setRandWord();
+    notifyListeners();
   }
 }

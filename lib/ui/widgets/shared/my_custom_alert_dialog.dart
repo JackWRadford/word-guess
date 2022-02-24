@@ -25,7 +25,7 @@ class MyCustomAlertDialog extends StatelessWidget {
       title: Center(
         child: Text(
           title,
-          style: textHeadline,
+          style: textTitle2,
           textAlign: TextAlign.center,
         ),
       ),

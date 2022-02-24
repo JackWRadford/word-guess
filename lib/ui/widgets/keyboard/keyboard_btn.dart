@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:word_guess/ui/shared/app_ui_sizes.dart';
 
@@ -33,7 +32,6 @@ class KeyboardBtn extends StatelessWidget {
               padding: const EdgeInsets.all(smallPadding),
               child: Icon(
                 iconData,
-                color: CupertinoColors.white,
               ),
             ),
           ),
