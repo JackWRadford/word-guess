@@ -55,14 +55,14 @@ class SharedPrefService {
     return results;
   }
 
-  /// set number of games
-  Future<void> setGames(int value) async {
-    await _mySetInt(_games, value);
+  /// iterate number of games played
+  Future<void> setGames() async {
+    await _mySetInt(_games, getGames() + 1);
   }
 
-  /// set number of games won
-  Future<void> setGamesWon(int value) async {
-    await _mySetInt(_gamesWon, value);
+  /// iterate number of games won
+  Future<void> setGamesWon() async {
+    await _mySetInt(_gamesWon, getGamesWon() + 1);
   }
 
   /// set darkMode value

@@ -3,12 +3,16 @@ import 'dart:math';
 import 'package:word_guess/core/all_words_list.dart';
 import 'package:word_guess/core/enums/char_tile_state.dart';
 import 'package:word_guess/core/enums/submit_state.dart';
+import 'package:word_guess/core/locator.dart';
 import 'package:word_guess/core/models/char_model.dart';
+import 'package:word_guess/core/services/shared_pref_service.dart';
 import 'package:word_guess/core/viewModels/base_model.dart';
 import 'package:word_guess/core/words_list.dart';
 
 /// view model for main game view
 class GameModel extends BaseModel {
+  final SharedPrefService _prefService = locator<SharedPrefService>();
+
   List<CharModel> k1 = [
     CharModel(char: 'q'),
     CharModel(char: 'w'),
@@ -157,9 +161,22 @@ class GameModel extends BaseModel {
         _resetKeyboard();
       }
       _currentIndex = 0;
+      // update shared prefs if end of game
+      if ((submitState == SubmitState.correct) ||
+          (submitState == SubmitState.last)) {
+        _updateSharedPrefs(submitState);
+      }
       notifyListeners();
     }
     return submitState;
+  }
+
+  void _updateSharedPrefs(SubmitState s) {
+    if (s == SubmitState.correct) {
+      _prefService.setGamesWon();
+      _prefService.setAttempt(_attempt);
+    }
+    _prefService.setGames();
   }
 
   bool _checkWordExists() {
