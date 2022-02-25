@@ -1,6 +1,6 @@
 import 'package:get_it/get_it.dart';
 import 'package:word_guess/core/services/shared_pref_service.dart';
-import 'package:word_guess/core/themeNotifier.dart';
+import 'package:word_guess/core/theme_notifier.dart';
 import 'package:word_guess/core/viewModels/game_model.dart';
 import 'package:word_guess/core/viewModels/statistics_model.dart';
 

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:word_guess/core/locator.dart';
-import 'package:word_guess/core/themeNotifier.dart';
+import 'package:word_guess/core/theme_notifier.dart';
 import 'package:word_guess/core/viewModels/game_model.dart';
 import 'package:word_guess/core/services/shared_pref_service.dart';
 import 'package:word_guess/core/viewModels/statistics_model.dart';

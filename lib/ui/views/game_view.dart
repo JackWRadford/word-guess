@@ -6,6 +6,7 @@ import 'package:word_guess/ui/shared/app_ui_sizes.dart';
 import 'package:word_guess/ui/shared/app_ui_spacing.dart';
 import 'package:word_guess/ui/widgets/game/game_area.dart';
 import 'package:word_guess/ui/widgets/keyboard/my_keyboard.dart';
+import 'package:word_guess/ui/widgets/settings/settings_dialog.dart';
 import 'package:word_guess/ui/widgets/statistics/stats_dialog.dart';
 
 /// main game view
@@ -26,7 +27,10 @@ class MainView extends StatelessWidget {
         centerTitle: true,
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              showDialog(
+                  context: context, builder: (ctx) => const SettingsDialog());
+            },
             icon: const Icon(Icons.settings),
           ),
         ],

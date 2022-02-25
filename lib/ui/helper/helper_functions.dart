@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:word_guess/core/enums/char_tile_state.dart';
-import 'package:word_guess/core/themeNotifier.dart';
+import 'package:word_guess/core/theme_notifier.dart';
 import 'package:word_guess/ui/shared/app_colours.dart';
 import 'package:word_guess/ui/shared/app_ui_sizes.dart';
 
