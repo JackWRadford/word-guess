@@ -11,8 +11,27 @@ import 'package:word_guess/ui/widgets/statistics/stats_dialog.dart';
 import 'package:word_guess/ui/widgets/tutorial/tutorial_dialog.dart';
 
 /// main game view
-class MainView extends StatelessWidget {
+class MainView extends StatefulWidget {
   const MainView({Key? key}) : super(key: key);
+
+  @override
+  State<MainView> createState() => _MainViewState();
+}
+
+class _MainViewState extends State<MainView> {
+  @override
+  void initState() {
+    // show tutorial dialog if first open
+    if (!Provider.of<GameModel>(context, listen: false).getNotFirst()) {
+      // ensure widget is completely built before attempting to show a dialog
+      WidgetsBinding.instance?.addPostFrameCallback((_) {
+        showDialog(context: context, builder: (ctx) => const TutorialDialog());
+        // update shredPrefs notFirst value
+        Provider.of<GameModel>(context, listen: false).setNotFirst();
+      });
+    }
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

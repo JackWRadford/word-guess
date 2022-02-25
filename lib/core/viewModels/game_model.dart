@@ -68,6 +68,14 @@ class GameModel extends BaseModel {
     _setRandWord();
   }
 
+  bool getNotFirst() {
+    return _prefService.getNotFirst();
+  }
+
+  Future<void> setNotFirst() async {
+    return await _prefService.setNotFirst(true);
+  }
+
   void _setRandWord() {
     String _newWord = words[_random.nextInt(words.length)];
     currentWord = _newWord;

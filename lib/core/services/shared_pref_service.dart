@@ -11,6 +11,9 @@ const String _gamesWon = 'gamesWon';
 const String _darkMode = 'darkMode';
 const String _noAds = 'noAds';
 
+/// true if not first open (defaults to false)
+const String _notFirst = 'notFirst';
+
 const List<String> _attempts = [
   'attemptsOne',
   'attemptsTwo',
@@ -46,6 +49,11 @@ class SharedPrefService {
     return _myGetBool(_noAds);
   }
 
+  /// get notFirst value
+  bool getNotFirst() {
+    return _myGetBool(_notFirst);
+  }
+
   /// get barchart data for attempts
   List<int> getAttemptsData() {
     List<int> results = [0, 0, 0, 0, 0, 0];
@@ -73,6 +81,11 @@ class SharedPrefService {
   /// set noAds value
   Future<void> setNoAds(bool value) async {
     await _mySetBool(_noAds, value);
+  }
+
+  /// set notFirst value
+  Future<void> setNotFirst(bool value) async {
+    await _mySetBool(_notFirst, value);
   }
 
   /// set attempt number for given attempt
