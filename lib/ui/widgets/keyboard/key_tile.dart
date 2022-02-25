@@ -34,7 +34,7 @@ class KeyTile extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.all(smallPadding),
               child: Text(
-                char,
+                char.toUpperCase(),
                 style: textHeadline,
               ),
             ),
