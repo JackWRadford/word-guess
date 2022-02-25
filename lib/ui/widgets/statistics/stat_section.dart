@@ -15,15 +15,15 @@ class StatSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        Text(
+          label,
+          style: textFootnote.copyWith(color: myGrey),
+        ),
+        UIHelper.verticalSpaceVerySmall(),
         // value
         Text(
           value,
           style: textHeadline,
-        ),
-        UIHelper.verticalSpaceVerySmall(),
-        Text(
-          label,
-          style: textFootnote.copyWith(color: myGrey),
         ),
       ],
     );

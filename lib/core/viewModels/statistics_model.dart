@@ -29,6 +29,6 @@ class StatisticsModel extends BaseModel {
 
   /// get barchart attempts data
   List<int> getAttempsData() {
-    return _prefService.getAttemptsData();
+    return [12, 34, 56, 400, 240, 321];
   }
 }

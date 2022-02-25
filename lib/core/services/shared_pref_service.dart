@@ -80,7 +80,7 @@ class SharedPrefService {
   Future<void> setAttempt(int a) async {
     // get new value
     List<int> currentValues = getAttemptsData();
-    await _mySetInt(_attempts[a - 1], currentValues[a - 1]++);
+    await _mySetInt(_attempts[a - 1], currentValues[a - 1] + 1);
   }
 
   /// used by [getGames], [getGamesWon], [getAttemptsData]

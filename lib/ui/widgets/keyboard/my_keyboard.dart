@@ -36,6 +36,7 @@ class MyKeyboard extends StatelessWidget {
                   showDialog(
                     context: context,
                     builder: (ctx) => const EndGameDialog(),
+                    barrierDismissible: false,
                   );
                 } else if (submitState == SubmitState.notWord) {
                   ScaffoldMessenger.of(context).showSnackBar(snackBar);
