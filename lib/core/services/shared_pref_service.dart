@@ -9,7 +9,6 @@ SharedPreferences? prefs;
 const String _games = 'games';
 const String _gamesWon = 'gamesWon';
 const String _darkMode = 'darkMode';
-const String _noAds = 'noAds';
 
 /// true if not first open (defaults to false)
 const String _notFirst = 'notFirst';
@@ -44,11 +43,6 @@ class SharedPrefService {
     return _myGetBool(_darkMode);
   }
 
-  /// get noAds value
-  bool getNoAds() {
-    return _myGetBool(_noAds);
-  }
-
   /// get notFirst value
   bool getNotFirst() {
     return _myGetBool(_notFirst);
@@ -76,11 +70,6 @@ class SharedPrefService {
   /// set darkMode value
   Future<void> setDarkMode(bool value) async {
     await _mySetBool(_darkMode, value);
-  }
-
-  /// set noAds value
-  Future<void> setNoAds(bool value) async {
-    await _mySetBool(_noAds, value);
   }
 
   /// set notFirst value
