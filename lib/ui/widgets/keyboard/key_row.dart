@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:word_guess/core/models/char_model.dart';
+import 'package:word_guess/ui/helper/helper_functions.dart';
 import 'package:word_guess/ui/widgets/keyboard/key_tile.dart';
 
 /// row of keys for keyboard
@@ -11,7 +12,7 @@ class KeyRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 50,
+      height: calcKeyWidth(MediaQuery.of(context).size.width) * 1.3, //50 //80
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         physics: const NeverScrollableScrollPhysics(),

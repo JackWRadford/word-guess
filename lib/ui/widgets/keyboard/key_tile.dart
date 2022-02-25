@@ -22,7 +22,7 @@ class KeyTile extends StatelessWidget {
         Provider.of<GameModel>(context, listen: false).keyboardInput(char);
       },
       child: SizedBox(
-        width: 35,
+        width: calcKeyWidth(MediaQuery.of(context).size.width), //35
         child: Card(
           color: getColorForState(context, ctState),
           margin: const EdgeInsets.symmetric(

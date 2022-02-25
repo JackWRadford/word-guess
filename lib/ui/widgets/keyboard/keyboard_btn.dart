@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:word_guess/ui/helper/helper_functions.dart';
 import 'package:word_guess/ui/shared/app_ui_sizes.dart';
 
 /// button for other keyboard actions (backspace and submit)
@@ -15,11 +16,13 @@ class KeyboardBtn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double w = calcKeyWidth(MediaQuery.of(context).size.width);
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
       onTap: onTap,
       child: SizedBox(
-        width: 45,
+        width: w * 1.2,
+        height: w * 1.3,
         child: Card(
           color: color,
           margin: const EdgeInsets.symmetric(

@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:word_guess/core/enums/char_tile_state.dart';
 import 'package:word_guess/core/themeNotifier.dart';
 import 'package:word_guess/ui/shared/app_colours.dart';
+import 'package:word_guess/ui/shared/app_ui_sizes.dart';
 
 /// return color for charTile depending on state
 Color getColorForState(BuildContext ctx, CharTileState ctState) {
@@ -24,4 +25,12 @@ Color getColorForState(BuildContext ctx, CharTileState ctState) {
     default:
       return bg;
   }
+}
+
+const double _maxW = 80;
+
+///calculate key width based on max number of keys, padding and screen width
+double calcKeyWidth(double screenW) {
+  double result = (screenW / 10) - (veryTinyPadding);
+  return (result < _maxW) ? result : _maxW;
 }

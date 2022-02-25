@@ -30,7 +30,7 @@ class MyCustomAlertDialog extends StatelessWidget {
         ),
       ),
       content: SizedBox(
-        width: 800,
+        width: 400,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.center,

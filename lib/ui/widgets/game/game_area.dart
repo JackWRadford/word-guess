@@ -11,15 +11,18 @@ class GameArea extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GridView.builder(
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: Provider.of<GameModel>(context).wordLength,
-          childAspectRatio: 1),
-      itemCount: guessData.length,
-      itemBuilder: (BuildContext ctx, i) =>
-          CharTile(char: guessData[i].char, ctState: guessData[i].ctState),
+    return ConstrainedBox(
+      constraints: const BoxConstraints(maxWidth: 600),
+      child: GridView.builder(
+        shrinkWrap: true,
+        physics: const NeverScrollableScrollPhysics(),
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: Provider.of<GameModel>(context).wordLength,
+            childAspectRatio: 1),
+        itemCount: guessData.length,
+        itemBuilder: (BuildContext ctx, i) =>
+            CharTile(char: guessData[i].char, ctState: guessData[i].ctState),
+      ),
     );
   }
 }
