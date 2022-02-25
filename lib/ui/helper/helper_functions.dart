@@ -31,6 +31,6 @@ const double _maxW = 80;
 
 ///calculate key width based on max number of keys, padding and screen width
 double calcKeyWidth(double screenW) {
-  double result = (screenW / 10) - (veryTinyPadding);
+  double result = ((screenW - tinyPadding) / 10);
   return (result < _maxW) ? result : _maxW;
 }
