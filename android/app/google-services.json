@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "883286471223",
+    "project_id": "word-guess-app",
+    "storage_bucket": "word-guess-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:883286471223:android:66f6ddf510b167a145c5b2",
+        "android_client_info": {
+          "package_name": "com.jackwradford.wordguess"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "883286471223-lnof02m7q5bb1b8b80e7830ia679fui8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCsdu18aaKGbzR0vtaCPoVTgnOVKNHCaiw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "883286471223-lnof02m7q5bb1b8b80e7830ia679fui8.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "883286471223-ds4jb9l221of0ktprk6uamjp0il2n14g.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.jackwradford.wordguess"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
