@@ -15,7 +15,6 @@ class GameArea extends StatelessWidget {
       constraints: const BoxConstraints(maxWidth: 600),
       child: GridView.builder(
         shrinkWrap: true,
-        physics: const NeverScrollableScrollPhysics(),
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: Provider.of<GameModel>(context).wordLength,
             childAspectRatio: 1),
