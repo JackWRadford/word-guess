@@ -17,6 +17,7 @@ class EndGameDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     GameModel gameModel = Provider.of<GameModel>(context, listen: false);
     return MyCustomAlertDialog(
+      hasClose: false,
       title: (gameModel.correctGuess) ? 'Congratulations' : 'Unlucky',
       mainContent: Column(
         mainAxisSize: MainAxisSize.min,

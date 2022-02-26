@@ -12,6 +12,7 @@ class SettingsDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MyCustomAlertDialog(
+      hasClose: true,
       title: 'Settings',
       mainContent: Column(
         children: [

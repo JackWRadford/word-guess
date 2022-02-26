@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:word_guess/ui/shared/app_colours.dart';
 import 'package:word_guess/ui/shared/app_text_styles.dart';
 import 'package:word_guess/ui/shared/app_ui_sizes.dart';
 
@@ -6,11 +8,13 @@ import 'package:word_guess/ui/shared/app_ui_sizes.dart';
 class MyCustomAlertDialog extends StatelessWidget {
   final String title;
   final Widget mainContent;
+  final bool hasClose;
 
   const MyCustomAlertDialog({
     Key? key,
     required this.title,
     required this.mainContent,
+    required this.hasClose,
   }) : super(key: key);
 
   @override
@@ -22,12 +26,36 @@ class MyCustomAlertDialog extends StatelessWidget {
         ),
       ),
       contentPadding: const EdgeInsets.fromLTRB(24, 20, 24, 24),
-      title: Center(
-        child: Text(
-          title,
-          style: textTitle2,
-          textAlign: TextAlign.center,
-        ),
+      title: Row(
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          (hasClose)
+              ? GestureDetector(
+                  behavior: HitTestBehavior.opaque,
+                  onTap: () => {},
+                  child: const Icon(
+                    CupertinoIcons.xmark,
+                    color: Colors.transparent,
+                  ),
+                )
+              : Container(),
+          Text(
+            title,
+            style: textTitle2,
+            textAlign: TextAlign.center,
+          ),
+          (hasClose)
+              ? GestureDetector(
+                  behavior: HitTestBehavior.opaque,
+                  onTap: () => Navigator.of(context).pop(),
+                  child: const Icon(
+                    CupertinoIcons.xmark,
+                    color: myGrey,
+                  ),
+                )
+              : Container(),
+        ],
       ),
       content: SizedBox(
         width: 400,

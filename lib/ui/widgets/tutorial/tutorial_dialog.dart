@@ -13,6 +13,7 @@ class TutorialDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MyCustomAlertDialog(
+      hasClose: true,
       title: 'How to play',
       mainContent: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

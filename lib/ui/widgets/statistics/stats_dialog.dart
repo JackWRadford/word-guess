@@ -15,6 +15,7 @@ class StatsDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     StatisticsModel _statsModal = Provider.of<StatisticsModel>(context);
     return MyCustomAlertDialog(
+      hasClose: true,
       title: 'Statistics',
       mainContent: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
