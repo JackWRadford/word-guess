@@ -15,7 +15,7 @@ class EndGameDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    GameModel gameModel = Provider.of<GameModel>(context);
+    GameModel gameModel = Provider.of<GameModel>(context, listen: false);
     return MyCustomAlertDialog(
       title: (gameModel.correctGuess) ? 'Congratulations' : 'Unlucky',
       mainContent: Column(
@@ -41,7 +41,7 @@ class EndGameDialog extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: smallPadding),
               child: GameArea(
-                guessData: Provider.of<GameModel>(context).charData,
+                guessData: gameModel.charData,
               ),
             ),
           ),
@@ -49,7 +49,7 @@ class EndGameDialog extends StatelessWidget {
           MyDialogTextBtn(
             text: 'Play again',
             onTap: () {
-              Provider.of<GameModel>(context, listen: false).resetGame();
+              gameModel.resetGame();
               Navigator.of(context).pop();
             },
           ),
